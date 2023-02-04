@@ -1,2 +1,12 @@
 sanity/sanity.dict sanity/sanity.in sanity/sanity.ref
 binary_edge/binary_edge.dict ../philphix ../philphix
+alphanumeric/test_alphanumeric.dict alphanumeric/test_alphanumeric.in alphanumeric/test_alphanumeric.ref
+basic/test_basic.dict basic/test_basic.in basic/test_basic.ref
+binary/test_binary.dict binary/test_binary.in binary/test_binary.ref
+capitalization/test_capitalization.dict capitalization/test_capitalization.in capitalization/test_capitalization.ref
+empty/test_empty.dict empty/test_empty.in empty/test_empty.ref
+large_dict/test_large_dict.dict large_dict/test_large_dict.in large_dict/test_large_dict.ref
+no_newline/test_no_newline.dict no_newline/test_no_newline.in no_newline/test_no_newline.ref
+no_newline_longer/test_no_newline_longer.dict no_newline_longer/test_no_newline_longer.in no_newline_longer/test_no_newline_longer.ref
+numbers/test_numbers.dict numbers/test_numbers.in numbers/test_numbers.ref
+tabs_and_spaces/test_tabs_and_spaces.dict tabs_and_spaces/test_tabs_and_spaces.in tabs_and_spaces/test_tabs_and_spaces.ref
