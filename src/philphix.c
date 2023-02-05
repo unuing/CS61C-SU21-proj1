@@ -136,7 +136,8 @@ void readDictionary(char *dictName)
         fclose(dictFile);
 }
 
-char *lowerAllButFirst(char *s) {
+char *lowerAllButFirst(char *s)
+{
         char *lowered = malloc(strlen(s) + 1);
         int i;
         for (i = 0; s[i]; i++) {
@@ -146,7 +147,8 @@ char *lowerAllButFirst(char *s) {
         return lowered;
 }
 
-char *lowerAll(char *s) {
+char *lowerAll(char *s)
+{
         char *lowered = malloc(strlen(s) + 1);
         int i;
         for (i = 0; s[i]; i++) {
@@ -156,7 +158,8 @@ char *lowerAll(char *s) {
         return lowered;
 }
 
-char *findFromDictionary(char *key) {
+char *findFromDictionary(char *key)
+{
         char *labf = lowerAllButFirst(key);
         char *la = lowerAll(key);
         char *foundData = findData(dictionary, key);
