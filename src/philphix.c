@@ -1,36 +1,11 @@
-/*
- * Include the provided hash table library.
- */
 #include "hashtable.h"
-
-/*
- * Include the header file.
- */
 #include "philphix.h"
-
-/*
- * Standard IO and file routines.
- */
 #include <stdio.h>
-
-/*
- * General utility routines (including malloc()).
- */
 #include <stdlib.h>
-
-/*
- * Character utility routines.
- */
 #include <ctype.h>
-
-/*
- * String utility routines.
- */
 #include <string.h>
 
-/*
- * This hash table stores the dictionary.
- */
+/* This hash table stores the dictionary. */
 HashTable *dictionary;
 
 /*
@@ -44,9 +19,8 @@ int main(int argc, char **argv)
                 fprintf(stderr, "Specify a dictionary\n");
                 return 1;
         }
-        /*
-         * Allocate a hash table to store the dictionary.
-         */
+
+        /* Allocate a hash table to store the dictionary. */
         fprintf(stderr, "Creating hashtable\n");
         dictionary = createHashTable(0x61C, &stringHash, &stringEquals);
 
@@ -57,10 +31,6 @@ int main(int argc, char **argv)
         fprintf(stderr, "Processing stdin\n");
         processInput();
 
-        /*
-         * The MAIN function in C should always return 0 as a way of telling
-         * whatever program invoked this that everything went OK.
-         */
         return 0;
 }
 
@@ -70,10 +40,6 @@ int main(int argc, char **argv)
  */
 unsigned int stringHash(void *s)
 {
-        // -- TODO --
-        // fprintf(stderr, "need to implement stringHash\n");
-
-        /* To suppress compiler warning until you implement this function, */
         unsigned int hash = 0;
         for (char *p = s; *p; p++) {
                 hash = hash * 31 + (*p);
@@ -87,9 +53,6 @@ unsigned int stringHash(void *s)
  */
 int stringEquals(void *s1, void *s2)
 {
-        // -- TODO --
-        // fprintf(stderr, "You need to implement stringEquals");
-        /* To suppress compiler warning until you implement this function */
         return !strcmp(s1, s2);
 }
 
@@ -114,8 +77,6 @@ int isAlphanumeric(char c)
  */
 void readDictionary(char *dictName)
 {
-        // -- TODO --
-        // fprintf(stderr, "You need to implement readDictionary\n");
         FILE *dictFile = fopen(dictName, "r");
         if (dictFile == NULL) {
                 fclose(dictFile);
@@ -198,8 +159,6 @@ char *findFromDictionary(char *key)
  */
 void processInput()
 {
-        // -- TODO --
-        // fprintf(stderr, "You need to implement processInput\n");
         char c;
         unsigned int size = 0, arrsize = 8;
         char *str = calloc(arrsize, sizeof(char));
