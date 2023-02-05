@@ -138,19 +138,21 @@ void readDictionary(char *dictName)
 
 char *lowerAllButFirst(char *s) {
         char *lowered = malloc(strlen(s) + 1);
-        strcpy(lowered, s);
-        for (int i = 1; s[i]; i++) {
-                lowered[i] = tolower(s[i]);
+        int i;
+        for (i = 0; s[i]; i++) {
+                lowered[i] = (char) (i == 0 ? s[i] : tolower(s[i]));
         }
+        lowered[i] = 0;
         return lowered;
 }
 
 char *lowerAll(char *s) {
         char *lowered = malloc(strlen(s) + 1);
-        strcpy(lowered, s);
-        for (int i = 0; s[i]; i++) {
-                lowered[i] = tolower(s[i]);
+        int i;
+        for (i = 0; s[i]; i++) {
+                lowered[i] = (char) tolower(s[i]);
         }
+        lowered[i] = 0;
         return lowered;
 }
 
