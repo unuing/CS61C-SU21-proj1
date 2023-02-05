@@ -13,3 +13,4 @@ extern void readDictionary(char *dictName);
 extern void processInput();
 
 #endif /* _PHILPHIX_H */
+
