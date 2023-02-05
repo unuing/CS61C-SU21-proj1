@@ -1,3 +1,3 @@
-# sp21-proj1-starter
+# Philphis
 
-Please add a description about what you created! Also add lessons you learned or bugs you encountered. 
+My implementation of CS61C Summer 2021 Project 1: Philphix, tests are copied from https://github.com/timlin901222/Philphix
