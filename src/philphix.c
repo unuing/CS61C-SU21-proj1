@@ -198,8 +198,8 @@ void processInput()
         // -- TODO --
         // fprintf(stderr, "You need to implement processInput\n");
         char c;
-        char *str = malloc(8);
         unsigned int size = 0, arrsize = 8;
+        char *str = malloc(arrsize);
         while ((c = (char) getc(stdin)) != EOF) {
 //        while (fread(&c, 1, 1, stdin)) {
                 if (isAlphanumeric(c)) {
