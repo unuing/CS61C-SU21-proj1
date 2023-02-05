@@ -108,9 +108,9 @@ void readDictionary(char *dictName)
         }
         char *key, *val;
         while (key = getstr(dictFile, isAlphanumeric)) {
-                getstr(dictFile, isWhiteSpace);
+                free(getstr(dictFile, isWhiteSpace));  /* Take whitespaces away. */
                 val = getstr(dictFile, notWhiteSpace);
-                getstr(dictFile, isWhiteSpace);
+                free(getstr(dictFile, isWhiteSpace));
                 insertData(dictionary, key, val);
         }
         free(key);
