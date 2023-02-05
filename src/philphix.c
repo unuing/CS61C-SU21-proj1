@@ -203,8 +203,7 @@ void processInput()
         char c;
         unsigned int size = 0, arrsize = 8;
         char *str = calloc(arrsize, sizeof(char));
-        while ((c = (char) getc(stdin)) != EOF) {
-//        while (fread(&c, 1, 1, stdin)) {
+        while (fread(&c, 1, 1, stdin)) {
                 if (isAlphanumeric(c)) {
                         str[size++] = c;
                         str[size] = 0;
@@ -216,8 +215,7 @@ void processInput()
                         printf("%s", found ? found : str);
                         size = 0;
                         str[0] = 0;
-                        printf("%c", c);
-//                        fwrite(&c, 1, 1, stdout);
+                        fwrite(&c, 1, 1, stdout);
                 }
         }
         char *found = findFromDictionary(str);
