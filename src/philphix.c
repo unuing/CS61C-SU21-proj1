@@ -63,6 +63,35 @@ int isAlphanumeric(char c)
                ('0' <= c && c <= '9');
 }
 
+int isWhiteSpace(char c)
+{
+        return c == ' ' || c == '\t' || c == '\n';
+}
+
+int notWhiteSpace(char c)
+{
+        return c != ' ' && c != '\t' && c != '\n';
+}
+
+char *getstr(FILE *stream, int (*accept)(char))
+{
+        unsigned int strsize = 0, arrsize = 8;
+        char *str = calloc(arrsize, sizeof(char));
+        char c;
+        while ((c = (char) getc(stream)) != EOF) {
+                if (!accept(c)) {
+                        ungetc(c, stream);
+                        break;
+                }
+                str[strsize++] = c;
+                if (strsize + 1 == arrsize) {
+                        str = realloc(str, arrsize *= 2);
+                }
+        }
+        str[strsize] = 0;
+        return strsize ? str : NULL;
+}
+
 /*
  * This function should read in every word and replacement from the dictionary
  * and store it in the hash table.  You should first open the file specified,
@@ -84,14 +113,10 @@ void readDictionary(char *dictName)
                 exit(61);
         }
         char *key, *val;
-        while (1) {
-                key = malloc(61);
-                if (fscanf(dictFile, "%s", key) == EOF) {
-                        free(key);
-                        break;
-                }
-                val = malloc(61);
-                fscanf(dictFile, "%s", val);
+        while (key = getstr(dictFile, isAlphanumeric)) {
+                getstr(dictFile, isWhiteSpace);
+                val = getstr(dictFile, notWhiteSpace);
+                getstr(dictFile, isWhiteSpace);
                 insertData(dictionary, key, val);
         }
         fclose(dictFile);

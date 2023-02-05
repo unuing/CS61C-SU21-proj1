@@ -10,3 +10,5 @@ no_newline/test_no_newline.dict no_newline/test_no_newline.in no_newline/test_no
 no_newline_longer/test_no_newline_longer.dict no_newline_longer/test_no_newline_longer.in no_newline_longer/test_no_newline_longer.ref
 numbers/test_numbers.dict numbers/test_numbers.in numbers/test_numbers.ref
 tabs_and_spaces/test_tabs_and_spaces.dict tabs_and_spaces/test_tabs_and_spaces.in tabs_and_spaces/test_tabs_and_spaces.ref
+long_word_dict/test_long_word_dict.dict long_word_dict/test_long_word_dict.in long_word_dict/test_long_word_dict.ref
+long_word_input/test_long_word_input.dict long_word_input/test_long_word_input.in long_word_input/test_long_word_input.ref
