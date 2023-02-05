@@ -52,9 +52,7 @@ unsigned int stringHash(void *s)
  * (case sensitive comparison) and 0 otherwise.
  */
 int stringEquals(void *s1, void *s2)
-{
-        return !strcmp(s1, s2);
-}
+{ return !strcmp(s1, s2); }
 
 int isAlphanumeric(char c)
 {
@@ -64,14 +62,10 @@ int isAlphanumeric(char c)
 }
 
 int isWhiteSpace(char c)
-{
-        return c == ' ' || c == '\t' || c == '\n';
-}
+{ return c == ' ' || c == '\t' || c == '\n'; }
 
 int notWhiteSpace(char c)
-{
-        return c != ' ' && c != '\t' && c != '\n';
-}
+{ return c != ' ' && c != '\t' && c != '\n'; }
 
 char *getstr(FILE *stream, int (*accept)(char))
 {
