@@ -119,6 +119,7 @@ void readDictionary(char *dictName)
                 getstr(dictFile, isWhiteSpace);
                 insertData(dictionary, key, val);
         }
+        free(key);
         fclose(dictFile);
 }
 
