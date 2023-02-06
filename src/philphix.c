@@ -5,6 +5,8 @@
 #include <ctype.h>
 #include <string.h>
 
+#define STR_INIT_SIZE 8
+
 /* This hash table stores the dictionary. */
 HashTable *dictionary;
 
@@ -69,7 +71,7 @@ int notWhiteSpace(char c)
 
 char *getstr(FILE *stream, int (*accept)(char))
 {
-	unsigned int strsize = 0, arrsize = 8;
+	unsigned int strsize = 0, arrsize = STR_INIT_SIZE;
 	char *str = calloc(arrsize, sizeof(char));
 	char c;
 	while ((c = (char) getc(stream)) != EOF) {
@@ -181,7 +183,7 @@ char *findFromDictionary(char *key)
 void processInput()
 {
 	char c;
-	unsigned int size = 0, arrsize = 8;
+	unsigned int size = 0, arrsize = STR_INIT_SIZE;
 	char *str = calloc(arrsize, sizeof(char));
 	while (fread(&c, 1, 1, stdin)) {
 		if (isAlphanumeric(c)) {
