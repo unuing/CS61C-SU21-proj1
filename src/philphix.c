@@ -15,23 +15,23 @@ HashTable *dictionary;
  */
 int main(int argc, char **argv)
 {
-        if (argc != 2) {
-                fprintf(stderr, "Specify a dictionary\n");
-                return 1;
-        }
+	if (argc != 2) {
+		fprintf(stderr, "Specify a dictionary\n");
+		return 1;
+	}
 
-        /* Allocate a hash table to store the dictionary. */
-        fprintf(stderr, "Creating hashtable\n");
-        dictionary = createHashTable(0x61C, &stringHash, &stringEquals);
+	/* Allocate a hash table to store the dictionary. */
+	fprintf(stderr, "Creating hashtable\n");
+	dictionary = createHashTable(0x61C, &stringHash, &stringEquals);
 
-        fprintf(stderr, "Loading dictionary %s\n", argv[1]);
-        readDictionary(argv[1]);
-        fprintf(stderr, "Dictionary loaded\n");
+	fprintf(stderr, "Loading dictionary %s\n", argv[1]);
+	readDictionary(argv[1]);
+	fprintf(stderr, "Dictionary loaded\n");
 
-        fprintf(stderr, "Processing stdin\n");
-        processInput();
+	fprintf(stderr, "Processing stdin\n");
+	processInput();
 
-        return 0;
+	return 0;
 }
 
 /*
@@ -40,11 +40,11 @@ int main(int argc, char **argv)
  */
 unsigned int stringHash(void *s)
 {
-        unsigned int hash = 0;
-        for (char *p = s; *p; p++) {
-                hash = hash * 31 + (*p);
-        }
-        return hash;
+	unsigned int hash = 0;
+	for (char *p = s; *p; p++) {
+		hash = hash * 31 + (*p);
+	}
+	return hash;
 }
 
 /*
@@ -56,9 +56,9 @@ int stringEquals(void *s1, void *s2)
 
 int isAlphanumeric(char c)
 {
-        return ('a' <= c && c <= 'z') ||
-               ('A' <= c && c <= 'Z') ||
-               ('0' <= c && c <= '9');
+	return ('a' <= c && c <= 'z') ||
+	       ('A' <= c && c <= 'Z') ||
+	       ('0' <= c && c <= '9');
 }
 
 int isWhiteSpace(char c)
@@ -69,21 +69,21 @@ int notWhiteSpace(char c)
 
 char *getstr(FILE *stream, int (*accept)(char))
 {
-        unsigned int strsize = 0, arrsize = 8;
-        char *str = calloc(arrsize, sizeof(char));
-        char c;
-        while ((c = (char) getc(stream)) != EOF) {
-                if (!accept(c)) {
-                        ungetc(c, stream);
-                        break;
-                }
-                str[strsize++] = c;
-                if (strsize + 1 == arrsize) {
-                        str = realloc(str, arrsize *= 2);
-                }
-        }
-        str[strsize] = 0;
-        return strsize ? str : NULL;
+	unsigned int strsize = 0, arrsize = 8;
+	char *str = calloc(arrsize, sizeof(char));
+	char c;
+	while ((c = (char) getc(stream)) != EOF) {
+		if (!accept(c)) {
+			ungetc(c, stream);
+			break;
+		}
+		str[strsize++] = c;
+		if (strsize + 1 == arrsize) {
+			str = realloc(str, arrsize *= 2);
+		}
+	}
+	str[strsize] = 0;
+	return strsize ? str : NULL;
 }
 
 /*
@@ -100,59 +100,60 @@ char *getstr(FILE *stream, int (*accept)(char))
  */
 void readDictionary(char *dictName)
 {
-        FILE *dictFile = fopen(dictName, "r");
-        if (dictFile == NULL) {
-                fclose(dictFile);
-                fprintf(stderr, "File does not exist.");
-                exit(61);
-        }
-        char *key, *val;
-        while (key = getstr(dictFile, isAlphanumeric)) {
-                free(getstr(dictFile, isWhiteSpace));  /* Take whitespaces away. */
-                val = getstr(dictFile, notWhiteSpace);
-                free(getstr(dictFile, isWhiteSpace));
-                insertData(dictionary, key, val);
-        }
-        free(key);
-        fclose(dictFile);
+	FILE *dictFile = fopen(dictName, "r");
+	if (dictFile == NULL) {
+		fclose(dictFile);
+		fprintf(stderr, "File does not exist.");
+		exit(61);
+	}
+	char *key, *val;
+	while (key = getstr(dictFile, isAlphanumeric)) {
+		free(getstr(dictFile,
+		            isWhiteSpace));  /* Take whitespaces away. */
+		val = getstr(dictFile, notWhiteSpace);
+		free(getstr(dictFile, isWhiteSpace));
+		insertData(dictionary, key, val);
+	}
+	free(key);
+	fclose(dictFile);
 }
 
 char *lowerAllButFirst(char *s)
 {
-        char *lowered = malloc(strlen(s) + 1);
-        int i;
-        for (i = 0; s[i]; i++) {
-                lowered[i] = (char) (i == 0 ? s[i] : tolower(s[i]));
-        }
-        lowered[i] = 0;
-        return lowered;
+	char *lowered = malloc(strlen(s) + 1);
+	int i;
+	for (i = 0; s[i]; i++) {
+		lowered[i] = (char) (i == 0 ? s[i] : tolower(s[i]));
+	}
+	lowered[i] = 0;
+	return lowered;
 }
 
 char *lowerAll(char *s)
 {
-        char *lowered = malloc(strlen(s) + 1);
-        int i;
-        for (i = 0; s[i]; i++) {
-                lowered[i] = (char) tolower(s[i]);
-        }
-        lowered[i] = 0;
-        return lowered;
+	char *lowered = malloc(strlen(s) + 1);
+	int i;
+	for (i = 0; s[i]; i++) {
+		lowered[i] = (char) tolower(s[i]);
+	}
+	lowered[i] = 0;
+	return lowered;
 }
 
 char *findFromDictionary(char *key)
 {
-        char *labf = lowerAllButFirst(key);
-        char *la = lowerAll(key);
-        char *foundData = findData(dictionary, key);
-        if (foundData == NULL) {
-                foundData = findData(dictionary, labf);
-        }
-        if (foundData == NULL) {
-                foundData = findData(dictionary, la);
-        }
-        free(labf);
-        free(la);
-        return foundData;
+	char *labf = lowerAllButFirst(key);
+	char *la = lowerAll(key);
+	char *foundData = findData(dictionary, key);
+	if (foundData == NULL) {
+		foundData = findData(dictionary, labf);
+	}
+	if (foundData == NULL) {
+		foundData = findData(dictionary, la);
+	}
+	free(labf);
+	free(la);
+	return foundData;
 }
 
 /*
@@ -179,26 +180,27 @@ char *findFromDictionary(char *key)
  */
 void processInput()
 {
-        char c;
-        unsigned int size = 0, arrsize = 8;
-        char *str = calloc(arrsize, sizeof(char));
-        while (fread(&c, 1, 1, stdin)) {
-                if (isAlphanumeric(c)) {
-                        str[size++] = c;
-                        str[size] = 0;
-                        if (size + 1 == arrsize) {
-                                str = realloc(str, arrsize *= 2);
-                        }
-                } else {
-                        char *found = findFromDictionary(str);
-                        printf("%s", found ? found : str);
-                        size = 0;
-                        str[0] = 0;
-                        fwrite(&c, 1, 1, stdout);
-                }
-        }
-        char *found = findFromDictionary(str);
-        printf("%s", found ? found : str);
-        free(str);
+	char c;
+	unsigned int size = 0, arrsize = 8;
+	char *str = calloc(arrsize, sizeof(char));
+	while (fread(&c, 1, 1, stdin)) {
+		if (isAlphanumeric(c)) {
+			str[size++] = c;
+			if (size + 1 == arrsize) {
+				str = realloc(str, arrsize *= 2);
+			}
+		} else {
+			str[size] = 0;
+			char *found = findFromDictionary(str);
+			char *prt = found ? found : str;
+			fwrite(prt, sizeof(char), strlen(prt), stdout);
+			size = 0;
+			str[0] = 0;
+			fwrite(&c, sizeof(char), 1, stdout);
+		}
+	}
+	char *found = findFromDictionary(str);
+	printf("%s", found ? found : str);
+	free(str);
 }
 

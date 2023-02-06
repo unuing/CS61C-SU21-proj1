@@ -20,18 +20,18 @@
  * for equality.
  */
 typedef struct HashBucket {
-        void *key;
-        void *data;
-        struct HashBucket *next;
+	void *key;
+	void *data;
+	struct HashBucket *next;
 } HashBucket;
 
 typedef struct HashTable {
-        int size;
-        HashBucket **data;
+	int size;
+	HashBucket **data;
 
-        unsigned int (*hashFunction)(void *);
+	unsigned int (*hashFunction)(void *);
 
-        int (*equalFunction)(void *, void *);
+	int (*equalFunction)(void *, void *);
 } HashTable;
 
 /*

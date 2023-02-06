@@ -9,24 +9,23 @@
 HashTable *createHashTable(int size, unsigned int (*hashFunction)(void *),
                            int (*equalFunction)(void *, void *))
 {
-        int i = 0;
-        HashTable *newTable = malloc(sizeof(HashTable));
-        if (NULL == newTable) {
-                fprintf(stderr, "malloc failed \n");
-                exit(1);
-        }
-        newTable->size = size;
-        newTable->data = malloc(sizeof(HashBucket *) * size);
-        if (NULL == newTable->data) {
-                fprintf(stderr, "malloc failed \n");
-                exit(1);
-        }
-        for (i = 0; i < size; i++) {
-                newTable->data[i] = NULL;
-        }
-        newTable->hashFunction = hashFunction;
-        newTable->equalFunction = equalFunction;
-        return newTable;
+	HashTable *newTable = malloc(sizeof(HashTable));
+	if (NULL == newTable) {
+		fprintf(stderr, "malloc failed \n");
+		exit(1);
+	}
+	newTable->size = size;
+	newTable->data = malloc(sizeof(HashBucket *) * size);
+	if (NULL == newTable->data) {
+		fprintf(stderr, "malloc failed \n");
+		exit(1);
+	}
+	for (int i = 0; i < size; i++) {
+		newTable->data[i] = NULL;
+	}
+	newTable->hashFunction = hashFunction;
+	newTable->equalFunction = equalFunction;
+	return newTable;
 }
 
 /*
@@ -37,12 +36,12 @@ HashTable *createHashTable(int size, unsigned int (*hashFunction)(void *),
  */
 void insertData(HashTable *table, void *key, void *data)
 {
-        unsigned int keyHash = table->hashFunction(key);
-        HashBucket *newBucket = malloc(sizeof(HashBucket));
-        newBucket->key = key;
-        newBucket->data = data;
-        newBucket->next = table->data[keyHash % table->size];
-        table->data[keyHash % table->size] = newBucket;
+	unsigned int keyHash = table->hashFunction(key);
+	HashBucket *newBucket = malloc(sizeof(HashBucket));
+	newBucket->key = key;
+	newBucket->data = data;
+	newBucket->next = table->data[keyHash % table->size];
+	table->data[keyHash % table->size] = newBucket;
 }
 
 /*
@@ -51,13 +50,13 @@ void insertData(HashTable *table, void *key, void *data)
  */
 void *findData(HashTable *table, void *key)
 {
-        unsigned int keyHash = table->hashFunction(key);
-        HashBucket *p;
-        for (p = table->data[keyHash % table->size]; p; p = p->next) {
-                if (table->equalFunction(key, p->key)) {
-                        return p->data;
-                }
-        }
-        return NULL;
+	unsigned int keyHash = table->hashFunction(key);
+	HashBucket *p;
+	for (p = table->data[keyHash % table->size]; p; p = p->next) {
+		if (table->equalFunction(key, p->key)) {
+			return p->data;
+		}
+	}
+	return NULL;
 }
 
