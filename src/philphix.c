@@ -84,8 +84,13 @@ char *getstr(FILE *stream, int (*accept)(char))
 			str = realloc(str, arrsize *= 2);
 		}
 	}
-	str[strsize] = 0;
-	return strsize ? str : NULL;
+	if (!strsize) {
+		free(str);
+		return NULL;
+	} else {
+		str[strsize] = 0;
+		return str;
+	}
 }
 
 /*
