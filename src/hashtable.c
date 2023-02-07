@@ -15,13 +15,10 @@ HashTable *createHashTable(int size, unsigned int (*hashFunction)(void *),
 		exit(1);
 	}
 	newTable->size = size;
-	newTable->data = malloc(sizeof(HashBucket *) * size);
+	newTable->data = calloc(size, sizeof(HashBucket *));
 	if (NULL == newTable->data) {
 		fprintf(stderr, "malloc failed \n");
 		exit(1);
-	}
-	for (int i = 0; i < size; i++) {
-		newTable->data[i] = NULL;
 	}
 	newTable->hashFunction = hashFunction;
 	newTable->equalFunction = equalFunction;
