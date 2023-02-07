@@ -72,7 +72,7 @@ int notWhiteSpace(char c)
 char *getstr(FILE *stream, int (*accept)(char))
 {
 	unsigned int strsize = 0, arrsize = STR_INIT_SIZE;
-	char *str = calloc(arrsize, sizeof(char));
+	char *str = malloc(arrsize);
 	char c;
 	while ((c = (char) getc(stream)) != EOF) {
 		if (!accept(c)) {
@@ -183,7 +183,7 @@ void processInput()
 {
 	char c;
 	unsigned int size = 0, arrsize = STR_INIT_SIZE;
-	char *str = calloc(arrsize, sizeof(char));
+	char *str = malloc(arrsize);
 	char *found, *write;
 	while (fread(&c, 1, 1, stdin)) {
 		if (isAlphanumeric(c)) {
@@ -201,6 +201,7 @@ void processInput()
 			fwrite(&c, sizeof(char), 1, stdout);
 		}
 	}
+	str[size] = 0;
 	found = findFromDictionary(str);
 	write = found ? found : str;
 	fwrite(write, sizeof(char), strlen(write), stdout);
