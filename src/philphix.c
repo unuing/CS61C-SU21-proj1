@@ -110,8 +110,7 @@ void readDictionary(char *dictName)
 	}
 	char *key, *val;
 	while (key = getstr(dictFile, isAlphanumeric)) {
-		free(getstr(dictFile,
-		            isWhiteSpace));  /* Take whitespaces away. */
+		free(getstr(dictFile, isWhiteSpace));  /* Take whitespaces away. */
 		val = getstr(dictFile, notWhiteSpace);
 		free(getstr(dictFile, isWhiteSpace));
 		insertData(dictionary, key, val);
@@ -185,6 +184,7 @@ void processInput()
 	char c;
 	unsigned int size = 0, arrsize = STR_INIT_SIZE;
 	char *str = calloc(arrsize, sizeof(char));
+	char *found, *write;
 	while (fread(&c, 1, 1, stdin)) {
 		if (isAlphanumeric(c)) {
 			str[size++] = c;
@@ -193,16 +193,17 @@ void processInput()
 			}
 		} else {
 			str[size] = 0;
-			char *found = findFromDictionary(str);
-			char *prt = found ? found : str;
-			fwrite(prt, sizeof(char), strlen(prt), stdout);
+			found = findFromDictionary(str);
+			write = found ? found : str;
+			fwrite(write, sizeof(char), strlen(write), stdout);
 			size = 0;
 			str[0] = 0;
 			fwrite(&c, sizeof(char), 1, stdout);
 		}
 	}
-	char *found = findFromDictionary(str);
-	printf("%s", found ? found : str);
+	found = findFromDictionary(str);
+	write = found ? found : str;
+	fwrite(write, sizeof(char), strlen(write), stdout);
 	free(str);
 }
 
