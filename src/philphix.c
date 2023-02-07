@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
 	/* Allocate a hash table to store the dictionary. */
 	fprintf(stderr, "Creating hashtable\n");
-	dictionary = createHashTable(0x61C, &stringHash, &stringEquals);
+	dictionary = createHashTable(0x61C, stringHash, stringEquals);
 
 	fprintf(stderr, "Loading dictionary %s\n", argv[1]);
 	readDictionary(argv[1]);
