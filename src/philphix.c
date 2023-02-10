@@ -189,7 +189,7 @@ void processInput()
 	char c;
 	unsigned int size = 0, arrsize = STR_INIT_SIZE;
 	char *str = malloc(arrsize);
-	char *found, *write;
+	char *found, *wrt;
 	while (fread(&c, 1, 1, stdin)) {
 		if (isAlphanumeric(c)) {
 			str[size++] = c;
@@ -199,8 +199,8 @@ void processInput()
 		} else {
 			str[size] = 0;
 			found = findFromDictionary(str);
-			write = found ? found : str;
-			fwrite(write, sizeof(char), strlen(write), stdout);
+			wrt = found ? found : str;
+			fwrite(wrt, sizeof(char), strlen(wrt), stdout);
 			size = 0;
 			str[0] = 0;
 			fwrite(&c, sizeof(char), 1, stdout);
@@ -208,8 +208,8 @@ void processInput()
 	}
 	str[size] = 0;
 	found = findFromDictionary(str);
-	write = found ? found : str;
-	fwrite(write, sizeof(char), strlen(write), stdout);
+	wrt = found ? found : str;
+	fwrite(wrt, sizeof(char), strlen(wrt), stdout);
 	free(str);
 }
 
