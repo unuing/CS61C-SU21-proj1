@@ -10,11 +10,6 @@
 /* This hash table stores the dictionary. */
 HashTable *dictionary;
 
-/*
- * The MAIN routine.  You can safely print debugging information
- * to standard error (stderr) as shown and it will be ignored in 
- * the grading process.
- */
 int main(int argc, char **argv)
 {
 	if (argc != 2) {
